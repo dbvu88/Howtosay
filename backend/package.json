@@ -2,9 +2,9 @@
   "name": "howtosay",
   "version": "1.0.0",
   "description": "app that allows user to learn languages together online",
-  "main": "./Server/",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node ./Server/"
+    "start": "nodemon --exec babel-node server.js"
   },
   "author": "",
   "license": "ISC",
