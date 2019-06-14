@@ -28,8 +28,36 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', routes.user);
 
+// reinitilize DB on server start
+const eraseDatabaseOnSync = true;
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-    console.log('listening on port ' + PORT)
+sequelize.sync({ force: eraseDatabaseOnSync }).then( async () => {
+    if(eraseDatabaseOnSync) {
+        createUsersWithQuestions()
+    }
+
+    const PORT = process.env.PORT || 3000
+    app.listen(PORT, () => {
+        console.log('listening on port ' + PORT)
+    })
 })
+
+// seed db
+const createUsersWithQuestions = async () => {
+    await models.User.create(
+        {
+            username: 'dbvu',
+            questions: [
+                {
+                    text: 'How are you?'
+                },
+                {
+                    text: 'She is a great musician'
+                }
+            ]
+        },
+        {
+            include: [models.Question]
+        }
+    )
+}
