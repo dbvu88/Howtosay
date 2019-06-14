@@ -3,7 +3,7 @@ import cors from 'cors'
 import express from 'express'
 import bodyParser from 'body-parser'
 import routes from './Routes'
-import models, { sequlize } from './Models'
+import models, { sequelize } from './Models'
 
 
 console.log('Hello Node.js project.');
