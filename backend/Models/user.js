@@ -8,7 +8,7 @@ const user = (sequelize, DataTypes) => {
 
     // defines 1 to many relationship
     User.associate = models => {
-        User.hasMany(models.Question)
+        User.hasMany(models.Question, { onDelete: 'CASCADE' })
     }
 
     // find user by login ingo
