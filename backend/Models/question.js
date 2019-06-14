@@ -1,6 +1,6 @@
 const question = (sequelize, DataTypes) => {
     const Question = sequelize.define('question', {
-        username: {
+        text: {
             type: DataTypes.STRING,
             // unique: true,
         }
