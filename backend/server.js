@@ -4,7 +4,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import routes from './Routes'
 import models, { sequelize } from './Models'
-
+import path from 'path'
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
 
 console.log('Hello Node.js project.');
 
@@ -12,9 +14,8 @@ console.log(process.env.MY_SECRET);
 
 const app = express()
 
-
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // custom middleware
