@@ -13,7 +13,7 @@ console.log(process.env.HOST);
 
 
 
-
+// create a database connection
 db.connect((err) => {
     if(err) {
         throw err
@@ -21,9 +21,11 @@ db.connect((err) => {
     console.log('MySql Connected ...')
 })
 
-
+//app initialization
 const app = express()
 
+// imported middleware
+app.use(express.json())
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
