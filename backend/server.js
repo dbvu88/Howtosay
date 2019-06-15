@@ -3,20 +3,15 @@ import cors from 'cors'
 import express from 'express'
 import bodyParser from 'body-parser'
 import routes from './Routes'
+import db from './Database'
 // import models, { sequelize } from './Models'
-import mysql from 'mysql'
 
 
 console.log('Hello Node.js project.');
 
 console.log(process.env.HOST);
 
-const db = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    // database: process.env.DATABASE
-})
+
 
 
 db.connect((err) => {
@@ -38,15 +33,8 @@ app.use((req, res, next) => (
     next()
 ))
 
-// create db
-app.get('/createdb', (req, res) => {
-    let sql = 'CREATE DATABASE Howtosay'
-    db.query(sql, (err, result) => {
-        if(err) throw err
-        console.log(result)
-        res.send('Database created ...')
-    })
-})
+app.use('/migration/', routes.migration);
+
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
